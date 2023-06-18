@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
+
 export const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -29,13 +30,46 @@ export const signup = async (req, res) => {
 
     newUser.save();
     const token = jwt.sign(
-      { email: email},
+      { email: newUser.email, id: newUser._id },
       process.env.JWT_SECRET,
       {
         expiresIn: "1h",
       }
     );
     return res.status(200).json({ result: newUser, token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Something went wrong...");
+  }
+};
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const existinguser = await users.findOne({ email });
+
+    if (!existinguser) {
+      return res.status(404).send("User does not exists, Sign up first");
+    }
+    const isPasswordCrt = await bcrypt.compare(password, existinguser.password);
+
+    if (!isPasswordCrt) {
+      return res.status(400).send("Invalid Password ");
+    }
+
+    const token = jwt.sign(
+      { email: existinguser.email, id: existinguser._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+    {
+      /*Highlyconfidential*/
+    }
+
+    res.status(200).json({ result: existinguser, token });
   } catch (error) {
     console.log(error);
     res.status(500).json("Something went wrong...");

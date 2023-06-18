@@ -1,5 +1,9 @@
 import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../actions/auth";
+
 import Box from "@mui/material/Box";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import Typography from "@mui/material/Typography";
@@ -21,7 +25,22 @@ const style = {
 function Popup(props) {
   const User = false;
   const [open, setOpen] = useState(!User);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    dispatch(login({ email, password }, navigate));
+  };
   const handleClose = () => setOpen(false);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    navigate("/signup");
+  };
   return props.trigger ? (
     <div className="popup">
       <Modal
@@ -48,7 +67,8 @@ function Popup(props) {
           <br />
           <div style={{ textAlign: "center" }}>
             <Button variant="outlined">Sign in with Google</Button>
-            <br /><br />
+            <br />
+            <br />
             <div>
               <hr
                 width="15%"
@@ -65,6 +85,10 @@ function Popup(props) {
               id="outlined-basic"
               label="Phone or email"
               variant="outlined"
+              name="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <br />
             <br />
@@ -72,20 +96,27 @@ function Popup(props) {
               id="outlined-basic"
               label="Password"
               variant="outlined"
+              name="password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <br /> <br />
-            <Button variant="contained">Sign in</Button>
+            <Button variant="contained" onClick={handleLogin}>
+              Sign in
+            </Button>
             <br /> <br />
             <Button variant="outlined">forgot password ?</Button>
-            <br /><br/>
+            <br />
+            <br />
             <Typography id="modal-modal-title" variant="h9" component="h5">
               Don't have an account ?{" "}
-              <a
-                href="http://localhost:3000"
-                style={{ textDecoration: "none", color: "#78c3de" }}
+              <Link
+                style={{ textDecoration: "none", color: "green" }}
+                onClick={handleRegister}
               >
-                Sign up
-              </a>
+                Register
+              </Link>
             </Typography>
           </div>
         </Box>
