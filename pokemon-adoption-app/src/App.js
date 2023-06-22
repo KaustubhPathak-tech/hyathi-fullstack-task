@@ -8,9 +8,13 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Register/Signup";
 import Login from "./pages/Login/Login";
 import Popup from "./components/Popup/Popup";
+import { useDispatch } from "react-redux";
+import { fetchAllPokemons } from "./actions/pokemons";
 
 function App() {
   var User = false;
+  const year = new Date().getFullYear();
+  const dispatch = useDispatch();
   const [popup, setPopup] = useState(false);
   useEffect(() => {
     if (User) {
@@ -19,7 +23,9 @@ function App() {
       setPopup(true);
     }
   }, [User]);
-
+  useEffect(() => {
+    dispatch(fetchAllPokemons());
+  }, [dispatch]);
   return (
     <div className="App">
       <BrowserRouter>
@@ -31,6 +37,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+
+        <div className="footer">&copy; {year} Hyati Technologies Pvt. Ltd.</div>
       </BrowserRouter>
     </div>
   );

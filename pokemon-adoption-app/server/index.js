@@ -2,6 +2,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users.js";
+import pokemonRoutes from "./routes/pokemons.js";
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -16,6 +17,7 @@ app.get("/", function (req, res) {
 });
 
 app.use("/user", userRoutes);
+app.use("/pokemon", pokemonRoutes);
 
 mongoose.set("strictQuery", false);
 const PORT = process.env.PORT || 7000;

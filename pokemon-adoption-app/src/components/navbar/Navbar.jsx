@@ -1,4 +1,5 @@
 import * as React from "react";
+import decode from "jwt-decode";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../actions/currentUser";
@@ -45,6 +46,7 @@ const Navbar = () => {
 
   const handlelogout = (e) => {
     e.preventDefault();
+    localStorage.clear();
     dispatch(setCurrentUser(null));
   };
   const menuId = "primary-search-account-menu";
@@ -126,9 +128,22 @@ const Navbar = () => {
       </MenuItem>
     </Menu>
   );
+
+  //Important settings for login operation
   React.useEffect(() => {
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   }, [dispatch]);
+
+  React.useEffect(() => {
+    const existingtoken = User?.token;
+    if (existingtoken) {
+      const decodedToken = decode(existingtoken);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        dispatch(setCurrentUser(null));
+      }
+    }
+  }, [dispatch,User]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

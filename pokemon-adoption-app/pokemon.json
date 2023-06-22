@@ -1,0 +1,10 @@
+{
+    "_id": "1",
+    "avatar":
+      "https://lh3.googleusercontent.com/a/AAcHTtc-RHF7Qfc1ZN79cHLWcIsAj59XRbfi_Chl8l2x8Q=s96-c",
+    "name": "Pokemon 1",
+    "age": "14",
+    "breed": "a",
+    "adopted": false,
+    "health": "2"
+  }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {signup} from "../../actions/auth"
-
+import "./Signup.css"
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Signup = () => {
 
   return (
     <div>
-      <Paper elevation={24}>
+      <Paper elevation={24} className="signup_paper">
         <br />
         <Typography variant="h7" component="h2" id="modal-modal-title">
           Register
