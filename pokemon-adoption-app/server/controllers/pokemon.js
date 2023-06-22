@@ -6,6 +6,7 @@ export const getAllPokemons = async (req, res) => {
     const allPokemonsDetails = [];
 
     //accessing each user details from database
+    
     allPokemons.forEach((Pokemons) => {
       allPokemonsDetails.push({
         _id: Pokemons._id,

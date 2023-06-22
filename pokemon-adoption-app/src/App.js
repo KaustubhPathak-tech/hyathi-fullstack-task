@@ -8,11 +8,11 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Register/Signup";
 import Login from "./pages/Login/Login";
 import Popup from "./components/Popup/Popup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPokemons } from "./actions/pokemons";
 
 function App() {
-  var User = false;
+  var User = useSelector((state) => state.fetch_current_userReducer);
   const year = new Date().getFullYear();
   const dispatch = useDispatch();
   const [popup, setPopup] = useState(false);

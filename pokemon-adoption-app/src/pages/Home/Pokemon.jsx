@@ -19,6 +19,23 @@ const Pokemon = ({ pokemon }) => {
     e.preventDefault();
     dispatch(feedPokemon({ name: pokemon.name }));
   };
+  var imogi="✌️";
+  if(pokemon.health<1){
+    imogi="🚨 very weak "
+  }
+  else if(pokemon.health===1){
+    imogi="😪 Weak"
+  }
+  else if(pokemon.health===2){
+    imogi="🙂 Normal"
+  }
+  else if(pokemon.health===3){
+    imogi="😊 Strong"
+  }
+  else if(pokemon.health>3){
+    imogi="💪 very strong"
+  }
+
   return (
     <div className="pokemon-container">
       <div className="img-container">
@@ -31,7 +48,7 @@ const Pokemon = ({ pokemon }) => {
         <br />
         Breed: {pokemon.breed}
         <br />
-        Health: {pokemon.health}/3
+        <span style={{color:"green"}}>Health : </span> {imogi}
         <br />
       </div>
       {pokemon.adopted === 0 ? (

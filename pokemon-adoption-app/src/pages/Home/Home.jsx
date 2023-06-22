@@ -25,20 +25,21 @@ const Home = () => {
         <>
           <br />
           <Paper
-            elevation={3}
+            elevation={0}
             style={{
               width: "90%",
               marginLeft: "5%",
-              backgroundColor: "#00C4FF",
+              backgroundColor:"#d7d7d7"
             }}
           >
             <div className="User-Pokemons">
-              <div className="User-Pokemons-heading">Your Pokemons</div>
+              <div className="User-Pokemons-heading">Adopted Pokemons</div>
               <div className="User-Pokemons-list">
                 <UserPokemonList list={pokemonList} />
               </div>
             </div>
           </Paper>
+          <hr />
         </>
       ) : (
         <></>
@@ -48,7 +49,7 @@ const Home = () => {
         <br />
         <div className="pokemon-intro-container">
           {check() ? (
-            <h1>Available Pokemons</h1>
+            <h1>Available Pokemons for adoption</h1>
           ) : (
             <h1>Sorry ! no more Pokemons available to adopt.</h1>
           )}
