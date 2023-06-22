@@ -43,3 +43,19 @@ export const adoptPokemon = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const feedPokemon = async (req, res) => {
+  const { name } = req.body;
+  try {
+    const myPokemon = await pokemon.findOne({ name });
+
+    const updatedPokemonhealth = await pokemon.updateOne(
+      { name: myPokemon.name },
+      { health: myPokemon.health + 1 }
+    );
+
+    res.status(200).json({ updatedPokemonhealth });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

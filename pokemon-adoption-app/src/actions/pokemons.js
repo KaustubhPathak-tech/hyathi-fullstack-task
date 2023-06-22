@@ -14,3 +14,11 @@ export const adoptPokemon = (userData) => async (dispatch) => {
     dispatch(fetchAllPokemons());
   } catch (error) {}
 };
+
+export const feedPokemon = (Data) => async (dispatch) => {
+  try {
+    const { data } = await api.feedPokemon(Data);
+    // dispatch({ type: "ADOPT_POKEMON", payload: data });
+    dispatch(fetchAllPokemons());
+  } catch (error) {}
+};

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Home.css";
 import { useDispatch, useSelector } from "react-redux";
-import { adoptPokemon } from "../../actions/pokemons";
+import { adoptPokemon, feedPokemon } from "../../actions/pokemons";
 
 const Pokemon = ({ pokemon }) => {
   var User = useSelector((state) => state.fetch_current_userReducer);
@@ -14,6 +14,10 @@ const Pokemon = ({ pokemon }) => {
     } else {
       dispatch(adoptPokemon({ userId: User.result._id, name: pokemon.name }));
     }
+  };
+  const handleFeed = (e) => {
+    e.preventDefault();
+    dispatch(feedPokemon({ name: pokemon.name }));
   };
   return (
     <div className="pokemon-container">
@@ -30,11 +34,23 @@ const Pokemon = ({ pokemon }) => {
         Health: {pokemon.health}/3
         <br />
       </div>
-      <div className="action-buttons">
-        <button className="btn btn-primary" onClick={handleAdoption}>
-          Adopt me
-        </button>
-      </div>
+      {pokemon.adopted === 0 ? (
+        <>
+          <div className="action-buttons">
+            <button className="btn btn-primary" onClick={handleAdoption}>
+              Adopt me
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="action-buttons">
+            <button className="btn btn-primary" onClick={handleFeed}>
+              Feed me
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

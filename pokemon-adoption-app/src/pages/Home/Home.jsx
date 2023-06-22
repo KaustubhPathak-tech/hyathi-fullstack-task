@@ -10,7 +10,14 @@ const Home = () => {
   const pokemonList = useSelector((state) => state.pokemonsReducer);
   console.log(pokemonList);
   function check(pok) {
-    return pok?.adopted === 1;
+    var ans = false;
+    for (var i = 0; i < pokemonList.length; i++) {
+      if (pokemonList[i].adopted === 0) {
+        ans = true;
+        break;
+      }
+    }
+    return ans;
   }
   return (
     <div className="home-container">
@@ -39,13 +46,13 @@ const Home = () => {
 
       <div className="pokemons">
         <br />
-        {/* <div className="pokemon-intro-container">
-          { ? (
-            <h1>Sorry ! no more Pokemons available to adopt.</h1>
-          ) : (
+        <div className="pokemon-intro-container">
+          {check() ? (
             <h1>Available Pokemons</h1>
+          ) : (
+            <h1>Sorry ! no more Pokemons available to adopt.</h1>
           )}
-        </div> */}
+        </div>
 
         <div className="pokemon-list-container">
           <PokemonList list={pokemonList} />

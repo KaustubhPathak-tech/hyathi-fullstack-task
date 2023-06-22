@@ -3,7 +3,6 @@ import "./Home.css";
 import Pokemon from "./Pokemon";
 
 const PokemonList = ({ list }) => {
-  console.log(list);
   return (
     <div>
       <>

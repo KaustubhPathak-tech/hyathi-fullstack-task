@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 
 const UserPokemonList = ({ list }) => {
   var User = useSelector((state) => state.fetch_current_userReducer);
-
-  console.log(list);
   return (
     <div>
       <>
