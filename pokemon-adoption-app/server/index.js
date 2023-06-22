@@ -1,9 +1,11 @@
 //jshint esversion:6
+import pokemon from "./models/pokemon.js";
 import express from "express";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users.js";
 import pokemonRoutes from "./routes/pokemons.js";
 import dotenv from "dotenv";
+
 import cors from "cors";
 
 const app = express();
