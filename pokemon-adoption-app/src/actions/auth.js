@@ -23,3 +23,14 @@ export const login = (authData, navigate) => async (dispatch) => {
         alert(error.response.data);
     }
   };
+
+  export const glogin = (authData, navigate) => async (dispatch) => {
+    try {
+      const { data } = await api.glogIn(authData);
+      dispatch({ type: "LOGIN", data });
+      dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+      navigate("/");
+    } catch (error) {
+      
+    }
+  };

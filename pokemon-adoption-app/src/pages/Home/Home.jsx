@@ -8,7 +8,6 @@ import { Paper } from "@mui/material";
 const Home = () => {
   var User = useSelector((state) => state.fetch_current_userReducer);
   const pokemonList = useSelector((state) => state.pokemonsReducer);
-  console.log(pokemonList);
   function check(pok) {
     var ans = false;
     for (var i = 0; i < pokemonList.length; i++) {

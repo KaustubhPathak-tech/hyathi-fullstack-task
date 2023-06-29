@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../actions/auth";
+import jwt_decode from "jwt-decode";
+import { login, glogin } from "../../actions/auth";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import "./Login.css"
+import "./Login.css";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  function handleCallbackResponse(res) {
+    var googleuser = jwt_decode(res.credential);
+    let name = googleuser?.name;
+    let email = googleuser?.email;
+    let password = googleuser?.sub;
+
+    dispatch(glogin({ name, email, password }, navigate));
+  }
+  useEffect(() => {
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id:
+        "602166184134-sj45i02o9tsjsc05h931q4mf0q1ogpnf.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("signIndiv"), {
+      scope: "profile email",
+      width: 240,
+      height: 50,
+      longtitle: true,
+      theme: "dark",
+    });
+  },[]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,7 +40,6 @@ const Login = () => {
   };
   return (
     <div>
-      
       <Paper elevation={24}>
         <Box className="login_box">
           <Typography id="modal-modal-title" variant="h7" component="h2">
