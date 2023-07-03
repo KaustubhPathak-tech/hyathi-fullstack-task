@@ -18,21 +18,21 @@ const Login = () => {
 
     dispatch(glogin({ name, email, password }, navigate));
   }
-  useEffect(() => {
-    /*global google*/
-    google.accounts.id.initialize({
-      client_id:
-        "602166184134-sj45i02o9tsjsc05h931q4mf0q1ogpnf.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById("signIndiv"), {
-      scope: "profile email",
-      width: 240,
-      height: 50,
-      longtitle: true,
-      theme: "dark",
-    });
-  },[]);
+  // useEffect(() => {
+  //   /*global google*/
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       "602166184134-sj45i02o9tsjsc05h931q4mf0q1ogpnf.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse,
+  //   });
+  //   google.accounts.id.renderButton(document.getElementById("signIndiv"), {
+  //     scope: "profile email",
+  //     width: 240,
+  //     height: 50,
+  //     longtitle: true,
+  //     theme: "dark",
+  //   });
+  // },[]);
 
   const handleLogin = (e) => {
     e.preventDefault();
