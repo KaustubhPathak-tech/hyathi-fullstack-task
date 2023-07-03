@@ -38,7 +38,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
 
-        <div className="footer"style={{position:"absolute",bottom:"0px"}}>&copy; {year} Hyati Technologies Pvt. Ltd.</div>
+        <div className="footer">&copy; {year} Hyati Technologies Pvt. Ltd.</div>
       </BrowserRouter>
     </div>
   );
